@@ -1,0 +1,23 @@
+language: rust
+
+env:
+  global:
+    - secure: X4/sNGk5o5hS/zs22y7TI/9LrdsBPd4rOYXrBbe0uNbpKgHadt8qxOezh8OMrO6ss+scdg9aqnjVzKeum9eaXF0O9ij26V02+S1cpMjRw5kxgeZyZvDDhdbmFyS74JJwvVkretywYbJxc8G604oQ0EnKoKzRcC+fkEdDOCdd0JQ=
+
+before_install:
+  - sudo apt-get update
+
+install:
+  - sudo apt-get install libblas-dev
+
+script:
+  - cargo build --verbose
+  - cargo test --verbose
+  - cargo doc --verbose
+  - ./check-line-length.sh
+
+after_success:
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bash upload-docs.sh'
+
+branches:
+  only: master
