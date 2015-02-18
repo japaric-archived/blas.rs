@@ -1,0 +1,8 @@
+[package]
+
+name = "blas"
+version = "0.0.0"
+authors = ["Jorge Aparicio <japaricious@gmail.com>"]
+
+[dependencies.complex]
+git = "https://github.com/japaric/complex.rs"
