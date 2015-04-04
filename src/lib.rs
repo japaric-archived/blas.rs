@@ -23,7 +23,7 @@ pub mod gemm;
 pub mod gemv;
 
 /// Transpose matrix before operation?
-#[derive(Copy)]
+#[derive(Clone, Copy)]
 #[repr(i8)]
 pub enum Transpose {
     /// Don't transpose
