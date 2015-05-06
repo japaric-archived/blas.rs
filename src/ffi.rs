@@ -100,6 +100,22 @@ extern {
         y: *const c_float,
         incy: *const blasint,
     ) -> c_float;
+
+    pub fn cdotu_(
+        n: *const blasint,
+        x: *const Complex<c_float>,
+        incx: *const blasint,
+        y: *const Complex<c_float>,
+        incy: *const blasint,
+    ) -> Complex<c_float>;
+
+    pub fn zdotu_(
+        n: *const blasint,
+        x: *const Complex<c_double>,
+        incx: *const blasint,
+        y: *const Complex<c_double>,
+        incy: *const blasint,
+    ) -> Complex<c_double>;
 }
 
 // y := alpha * A * x + beta * y
@@ -227,5 +243,50 @@ extern {
         beta: *const Complex<c_double>,
         c: *mut Complex<c_double>,
         ldc: *const blasint,
+    );
+}
+
+#[link(name="blas")]
+extern {
+    pub fn sscal_(
+        n: *const blasint,
+        alpha: *const c_float,
+        x: *mut c_float,
+        incx: *const blasint,
+    );
+
+    pub fn dscal_(
+        n: *const blasint,
+        alpha: *const c_double,
+        x: *mut c_double,
+        incx: *const blasint,
+    );
+
+    pub fn cscal_(
+        n: *const blasint,
+        alpha: *const Complex<c_float>,
+        x: *mut Complex<c_float>,
+        incx: *const blasint,
+    );
+
+    pub fn zscal_(
+        n: *const blasint,
+        alpha: *const Complex<c_double>,
+        x: *mut Complex<c_double>,
+        incx: *const blasint,
+    );
+
+    pub fn csscal_(
+        n: *const blasint,
+        alpha: *const c_float,
+        x: *mut Complex<c_float>,
+        incx: *const blasint,
+    );
+
+    pub fn zdscal_(
+        n: *const blasint,
+        alpha: *const c_double,
+        x: *mut Complex<c_double>,
+        incx: *const blasint,
     );
 }

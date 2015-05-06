@@ -1,9 +1,9 @@
 //! Traits that map BLAS accelerated types (e.g. `f32`) to their respective BLAS calls (e.g.
 //! `saxpy`)
 //!
-//! This library provides no utilities to call BLAS functions on e.g. slices.
+//! This library provides no safe wrappers around the foreign BLAS functions.
 //!
-//! If you are looking for a BLAS accelerated linear algebra, check out the experimental [linalg].
+//! If you are looking for a BLAS accelerated linear algebra, check out [linalg].
 //!
 //! [linalg]: https://github.com/japaric/linalg.rs
 
@@ -21,6 +21,7 @@ pub mod copy;
 pub mod dot;
 pub mod gemm;
 pub mod gemv;
+pub mod scal;
 
 /// Transpose matrix before operation?
 #[derive(Clone, Copy)]
@@ -60,6 +61,12 @@ pub trait Gemm {
 pub trait Gemv {
     /// Returns the foreign `gemv` function
     fn gemv() -> gemv::Fn<Self>;
+}
+
+/// Types with `scal` acceleration
+pub trait Scal<Alpha=Self> {
+    /// Returns the foreign `scal` function
+    fn scal() -> scal::Fn<Alpha, Self>;
 }
 
 /// The integer used by the BLAS library
