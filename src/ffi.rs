@@ -47,7 +47,6 @@ extern {
 }
 
 // y := x
-#[link(name="blas")]
 extern {
     pub fn ccopy_(
         n: *const blasint,
@@ -83,7 +82,6 @@ extern {
 }
 
 // dot := x^T * y
-#[link(name="blas")]
 extern {
     pub fn ddot_(
         n: *const blasint,
@@ -119,7 +117,6 @@ extern {
 }
 
 // y := alpha * A * x + beta * y
-#[link(name="blas")]
 extern {
     pub fn cgemv_(
         trans: *const Transpose,
@@ -179,7 +176,6 @@ extern {
 }
 
 // C := alpha * A * B + beta * C
-#[link(name="blas")]
 extern {
     pub fn cgemm_(
         transa: *const Transpose,
@@ -246,7 +242,34 @@ extern {
     );
 }
 
-#[link(name="blas")]
+// nrm2 <- ||x||_2
+extern {
+    pub fn dnrm2_(
+        n: *const blasint,
+        x: *const c_double,
+        incx: *const blasint,
+    ) -> c_double;
+
+    pub fn dznrm2_(
+        n: *const blasint,
+        x: *const Complex<c_double>,
+        incx: *const blasint,
+    ) -> c_double;
+
+    pub fn snrm2_(
+        n: *const blasint,
+        x: *const c_float,
+        incx: *const blasint,
+    ) -> c_float;
+
+    pub fn scnrm2_(
+        n: *const blasint,
+        x: *const Complex<c_float>,
+        incx: *const blasint,
+    ) -> c_float;
+}
+
+// y := alpha * x
 extern {
     pub fn sscal_(
         n: *const blasint,

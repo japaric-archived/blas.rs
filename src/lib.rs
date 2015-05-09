@@ -21,6 +21,7 @@ pub mod copy;
 pub mod dot;
 pub mod gemm;
 pub mod gemv;
+pub mod nrm2;
 pub mod scal;
 
 /// Transpose matrix before operation?
@@ -61,6 +62,15 @@ pub trait Gemm {
 pub trait Gemv {
     /// Returns the foreign `gemv` function
     fn gemv() -> gemv::Fn<Self>;
+}
+
+/// Types with `nrm2` acceleration
+pub trait Nrm2 {
+    /// The type of `nrm2`'s return value
+    type Output;
+
+    /// Returns the foreign `nrm2` function
+    fn nrm2() -> nrm2::Fn<Self, Self::Output>;
 }
 
 /// Types with `scal` acceleration
