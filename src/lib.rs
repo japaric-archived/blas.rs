@@ -25,7 +25,7 @@ pub mod nrm2;
 pub mod scal;
 
 /// Transpose matrix before operation?
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 #[repr(i8)]
 pub enum Transpose {
     /// Don't transpose
